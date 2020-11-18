@@ -1,0 +1,19 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<stdio.h>
+//假设p的值为0x100000，下表值分别为多少
+//test类型的变量大小是20字节
+struct Test
+{
+	int Num;
+	char* pcName;
+	short sDate;
+	char cha[2];
+	short sBa[4];
+}*p;
+int main()
+{
+	p = (struct Test*)0x100000;
+	printf("%p\n", p + 0x1);//结构体+1跳过一个字节0x00100000+20=0x00100014
+	printf("%p\n", (unsigned long)p + 0x1);//1048576+110485767,0x00100001
+	printf("%p\n", (unsigned int*)p + 0x1);//转换成整型加1（int=4）00100004
+}
